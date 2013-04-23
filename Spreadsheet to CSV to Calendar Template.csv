@@ -1,0 +1,33 @@
+Subject,Start Date,Start Time,End Date,End Time,All Day Event,Description,Location,Private
+Example Subject,4/10/2013,7:10 PM,4/10/2013,10:00 PM,FALSE,Example Description,Example Location,TRUE
+Example Subject 2,4/11/2013,7:30 PM,4/11/2013,10:30 PM,FALSE,Example Description 2,Example Location 2,TRUE
+Example Subject 3,4/12/2013,10:00 PM,4/13/2013,12:00 AM,FALSE,Example Description 3,Example Location 3,TRUE
+All day 1,4/13/2013,,,,TRUE,Example Description 4,Example Location 4,TRUE
+All day 2 multi day,4/14/2013,,4/16/2013,,TRUE,Example Description 5,Example Location 5,TRUE
+No end date,4/15/2013,9:00 AM,,10:00 AM,FALSE,There is no end date in this event. Hopefully it will assume the same day.,Some location with no end date,TRUE
+Comma in location,4/16/2013,10:00 AM,4/16/2013,11:00 AM,FALSE,There is a comma in the location of this one.,"Example city, example state",TRUE
+“Quotes” in the subject,4/17/2013,8:00 AM,4/17/2013,10:00 AM,FALSE,Single ‘quotes’ in the description,Both “double quotes” and ‘single quotes’ in the location,TRUE
+Special characters in subject ! @ # $ % ^ & * ( ) { } [ ] ,4/18/2013,7:00 AM,4/18/2013,10:00 AM,FALSE,Special characters in description ! @ # $ % ^ & * ( ) { } [ ] ,Special characters in location ! @ # $ % ^ & * ( ) { } [ ] ,TRUE
+,,,,,,,,
+Event after a skipped row,4/19/2013,10:00 PM,4/19/2013,11:00 PM,FALSE,This event follows a skipped row,After skipped row,
+Event with no location,4/20/2013,12:00 PM,4/20/2013,1:00 PM,FALSE,No location at all!,,TRUE
+Event with no description,4/21/2013,1:00 PM,4/21/2013,2:00 PM,FALSE,,Description-less location,TRUE
+Leading and trailing spaces,  4/22/2013  ,  7:17 PM  ,  4/22/2013  ,  10:17 PM  ,  FALSE  ,  Example Description  ,  Example Location  ,  TRUE  
+“Gotcha” cell with just a space,4/23/2013,7:00 AM, ,7:30 AM,FALSE, , ,TRUE
+,,,,,,,,TRUE
+,4/24/2013,8:10 AM,4/24/2013,9:40 AM,FALSE,Blank subject and spaces in location,    ,TRUE
+           ,4/25/2013,9:00 AM,4/25/2013,10:00 AM,FALSE,Spaces in subject,,TRUE
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+Final event,4/28/2013,8:00 AM,4/28/2013,8:00 PM,FALSE,Last event to look for.,End of the road,TRUE
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
