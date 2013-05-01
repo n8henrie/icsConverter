@@ -50,6 +50,10 @@ try:
         reader_builder = list(csv.DictReader(open(easygui.fileopenbox(msg="Please select the .csv file to be converted to .ics", title="", default=expanduser("~/Desktop/"), filetypes=["*.csv"]), 'rb'), skipinitialspace = True))
     else:
         reader_builder = list(csv.DictReader(open(easygui.fileopenbox(msg="Please select the .csv file to be converted to .ics", title="", default=expanduser("~/"), filetypes=["*.csv"]), 'rb'), skipinitialspace = True))
+
+# For testing comment 4 lines above (2 x if / else) and use this:
+#        reader_builder = list(csv.DictReader(open('path_to_tester.csv', 'rb'), skipinitialspace = True))
+
 except:
     easygui.msgbox('Looks like there was an error opening the file, didn\'t even make it to the conversion part. Sorry!')
     exit(1)
@@ -77,20 +81,16 @@ try:
         event.add('summary', row['Subject'])
 
     # If marked as an "all day event," ignore times.
-    # icalendar module doesn't like bare dates
-    # without times, so will default to midnight.
-    # Therefore add 1 day to end date to make a 24
-    # hour period. Set as transparent (= free / not busy).
     # If start and end date are the same
     # or if end date is blank default to a single 24-hour event.
         if row['All Day Event'].lower() == 'true':
             event.add('transp', 'TRANSPARENT')
-            event.add('dtstart', datetime.strptime(row['Start Date'], '%m/%d/%Y' ))
+            event.add('dtstart', datetime.strptime(row['Start Date'], '%m/%d/%Y' ).date())
     #            pdb.set_trace()
-            if row['Start Date'] == row['End Date'] or row['End Date'] == '':
-                event.add('dtend', datetime.strptime(row['Start Date'], '%m/%d/%Y' ) + timedelta(days=1))
+            if row['End Date'] == '':
+                event.add('dtend', (datetime.strptime(row['Start Date'], '%m/%d/%Y' ) + timedelta(days=1)).date())
             else:
-                event.add('dtend', datetime.strptime(row['End Date'], '%m/%d/%Y' ) + timedelta(days=1))
+                event.add('dtend', (datetime.strptime(row['End Date'], '%m/%d/%Y' ) + timedelta(days=1)).date())
 
     # Continue processing events not marked as "all day" events.
         else:
@@ -133,6 +133,9 @@ try:
         f = open(easygui.filesavebox(msg='Save .ics File', title='', default=expanduser('~/Desktop/') + 'calendar.ics', filetypes=['*.ics']), 'wb')
     else:
         f = open(easygui.filesavebox(msg='Save .ics File', title='', default=expanduser('~/') + 'calendar.ics', filetypes=['*.ics']), 'wb')
+
+# For testing comment 4 lines above (2 x if / else) and use this:
+#    f = open('path_to_tester.csvcalendar.ics', 'wb')
 
     f.write(cal.to_ical())
     f.close()
