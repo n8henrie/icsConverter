@@ -24,13 +24,13 @@ def CheckHeaders(headers):
     'All Day Event', 'Start Time', 'Private',
     'End Time', 'Location', 'Start Date', 'Subject']
 
-    for header in headers:
-        if header not in valid_keys:
-            easygui.msgbox('Looks like one or more of your headers is not quite right, so the script will exit after this. Make sure there aren\'t any leading or trailing spaces, and check the capitalization, and try again. The headers need to be *exactly* like this (without the quotes):\n\n{0}\n\nLooks like the first problematic header was: "{1}".'.format('"' + '" "'.join(valid_keys) + '"', header))
+    if (set(headers) != set(valid_keys)
+    or len(headers) != len(valid_keys)):
+        easygui.msgbox('Looks like one or more of your headers is not quite right, so the script will exit after this. Make sure there aren\'t any leading or trailing spaces, and check the capitalization, and try again. The headers need to be *exactly* like this (without the quotes):\n\n{0}\n\nLooks like the first problematic header was: "{1}".'.format('"' + '" "'.join(valid_keys) + '"', header))
 
-            exit(1)
-        else:
-            pass
+        exit(1)
+    else:
+        pass
 
 def CleanSpaces(csv_dict):
     '''Cleans trailing spaces from the dictionary
@@ -116,7 +116,7 @@ try:
         event['uid'] = str(randint(1,10**30)) + datetime.now().strftime('%Y%m%dT%H%M%S') + '___n8henrie.com'
 
         cal.add_component(event)
-    rownum += 1
+        rownum += 1
 
 except:
     if rownum > 0:
