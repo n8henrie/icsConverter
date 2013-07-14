@@ -47,9 +47,9 @@ def CleanSpaces(csv_dict):
 # function gets rid of trailing spaces.
 try:
     if isdir(expanduser("~/Desktop")):
-        reader_builder = list(csv.DictReader(open(easygui.fileopenbox(msg="Please select the .csv file to be converted to .ics", title="", default=expanduser("~/Desktop/"), filetypes=["*.csv"]), 'rb'), skipinitialspace = True))
+        reader_builder = list(csv.DictReader(open(easygui.fileopenbox(msg="Please select the .csv file to be converted to .ics", title="", default=expanduser("~/Desktop/"), filetypes=["*.csv"]), 'Ub'), skipinitialspace = True))
     else:
-        reader_builder = list(csv.DictReader(open(easygui.fileopenbox(msg="Please select the .csv file to be converted to .ics", title="", default=expanduser("~/"), filetypes=["*.csv"]), 'rb'), skipinitialspace = True))
+        reader_builder = list(csv.DictReader(open(easygui.fileopenbox(msg="Please select the .csv file to be converted to .ics", title="", default=expanduser("~/"), filetypes=["*.csv"]), 'Ub'), skipinitialspace = True))
 
 # For testing comment 4 lines above (2 x if / else) and use this:
 #        reader_builder = list(csv.DictReader(open('path_to_tester.csv', 'rb'), skipinitialspace = True))
