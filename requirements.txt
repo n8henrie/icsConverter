@@ -1,5 +1,9 @@
+altgraph==0.10.2
 easygui==0.94
 icalendar==3.3
+macholib==1.5.1
+modulegraph==0.10.4
+py2app==0.7.3
 python-dateutil==2.1
 pytz==2013b
 six==1.3.0
