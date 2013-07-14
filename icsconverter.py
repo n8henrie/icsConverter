@@ -14,6 +14,7 @@ from random import randint
 import easygui
 from sys import exit
 from os.path import expanduser,isdir
+import logging
 
 def CheckHeaders(headers):
     '''Makes sure that all the headers are exactly
@@ -118,9 +119,10 @@ try:
         cal.add_component(event)
         rownum += 1
 
-except:
+except Exception, e:
     if rownum > 0:
         easygui.msgbox('I had a problem with an event. I think I might have gotten through about {0} events and had trouble with an event with subject: {1}. Sorry!'.format(rownum, row['Subject']))
+        logging.exception(e)
     elif rownum == 0:
         easygui.msgbox('Looks like I didn\'t even get through the first event. Sorry!')
     else:
