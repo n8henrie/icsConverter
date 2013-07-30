@@ -21,3 +21,6 @@ I've tried to port this to a webapp with Google Apps Engine. If the link isn't h
 
 ## Usage
 Not going to write this over again. See my post here: http://n8henrie.com
+
+## GitHub Pages
+Giving a shot to a [GitHub Page for icsConverter](http://n8henrie.github.io/icsConverter/).
