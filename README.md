@@ -20,7 +20,7 @@ Hmmm. Unclear what it would take to port to windows. You may give a shot to the 
 I've tried to port this to a webapp with Google Apps Engine. If the link isn't here, I'm still working on it.
 
 ## Usage
-Not going to write this over again. See my post here: http://n8henrie.com
+Not going to write this over again. See my post [here](http://n8henrie.com/2013/05/spreadsheet-to-calendar/).
 
 ## GitHub Pages
 Giving a shot to a [GitHub Page for icsConverter](http://n8henrie.github.io/icsConverter/).
