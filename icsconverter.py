@@ -27,9 +27,15 @@ def CheckHeaders(headers):
 
     if (set(headers) != set(valid_keys)
     or len(headers) != len(valid_keys)):
-        easygui.msgbox('Looks like one or more of your headers is not quite right, so the script will exit after this. Make sure there aren\'t any leading or trailing spaces, and check the capitalization, and try again. The headers need to be *exactly* like this (without the quotes):\n\n{0}\n\nLooks like the first problematic header was: "{1}".'.format('"' + '" "'.join(valid_keys) + '"', header))
-
-        exit(1)
+        for header in headers:
+            if header not in valid_keys:
+                if header == '':
+                    header = '"" (<- an emtpy column)'
+                easygui.msgbox('Looks like one or more of your headers is not quite right, so the script will exit after this. Make sure there aren\'t any leading or trailing spaces, and check the capitalization, and try again. The headers need to be *exactly* like this (without the quotes):\n\n{0}\n\nLooks like the first problematic header was: "{1}".'.format('"' + '" "'.join(valid_keys) + '"', header))
+                exit(1)
+            elif len(headers) < len(valid_keys):
+                easygui.msgbox('I think you may be missing one or more headers. The headers need to be *exactly* like this (without the quotes):\n\n{0}\n\n'.format('"' + '" "'.join(valid_keys)))
+                exit(1)
     else:
         pass
 
