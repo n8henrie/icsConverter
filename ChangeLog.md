@@ -1,5 +1,11 @@
 # icsConverter ChangeLog
 
+## v5 20131006
+* Improved logging, in large part thanks to [this](http://victorlin.me/posts/2012/08/good-logging-practice-in-python/) reader-friendly writeup.
+* Added a check_dates_and_times function to help end users debug errors.
+* Added some basic tests with [nose](http://nose.readthedocs.org/en/latest/).
+* Made checking and allowing None values more robust.
+
 ## v4 20130924 
 * Improved error handling for blank or improper headers.
 * Fixed bug in reporting which header caused an error.

@@ -6,6 +6,9 @@ It can be a major hassle to take a spreadsheet of events and import them to a ca
 
 The spreadsheet must be meticulously formatted and exported to the .csv. If I'm going to be honest, the formatting is the hard part; the task handled by this app can be done easily enough by uploading the .csv to Google Calendar and re-downloading as .ics. However, for those that would rather not use Google Calendar for the conversion, this should do the trick.
 
+### ChangeLog
+Hosted separately, [here](https://github.com/n8henrie/icsConverter/blob/master/ChangeLog.md).
+
 ## Installation
 #### OSX
 I've used [py2app](https://pypi.python.org/pypi/py2app/) to create a regular old OSX app that *should* work on 10.6+
