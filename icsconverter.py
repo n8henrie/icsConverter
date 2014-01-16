@@ -174,9 +174,8 @@ def main(open_gui = None):
                     all_day = row.get('All Day Event'),
                     subject = row.get('Subject')
                 )
-            except:
-                pass
-                # sys.exit(1)
+            except DateTimeError as e:
+                sys.exit(e)
             
         # If marked as an "all day event," ignore times.
         # If start and end date are the same
@@ -261,8 +260,10 @@ def main(open_gui = None):
         sys.exit(3)
 
 if __name__ == "__main__":
-    
-    if len(sys.argv) > 1:
-        main(open_gui = sys.argv[1])
-    else:
-        main()
+    try:
+        if len(sys.argv) > 1:
+            main(open_gui = sys.argv[1])
+        else:
+            main()
+    except (HeadersError, DateTimeError) as e:
+        sys.exit(e)
