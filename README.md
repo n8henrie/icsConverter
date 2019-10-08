@@ -21,9 +21,9 @@ Hmmm. Unclear what it would take to port to windows. You may give a shot to the 
 
 #### WebApp
 
-~~icsConverterWebapp~~ used to be hosted at
-http://icsconverterwebapp.n8henrie.com, but not anymore. The updated version is
-[live at icw.n8henrie.com](http://icw.n8henrie.com), source code at
+icsConverterWebapp used to be hosted at http://icsconverterwebapp.n8henrie.com,
+but not anymore. The updated version is [live at
+icw.n8henrie.com](http://icw.n8henrie.com), source code at
 <https://github.com/n8henrie/icw>.
 
 ## Usage
