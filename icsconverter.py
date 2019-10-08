@@ -65,7 +65,7 @@ def clean_spaces(csv_dict):
                 clean_row.update({ k: v.strip() })
             else:
                 clean_row.update({ k: None })
-                
+
         yield clean_row
 
 def check_dates_and_times(
@@ -73,9 +73,9 @@ def check_dates_and_times(
         end_date = None, end_time = None, all_day = None, subject = None
     ):
     '''Checks the dates and times to make sure everything is kosher.'''
-    
+
     logger.debug('Date checker started.')
-    
+
     # Gots to have a start date, no matter what.
     if start_date in ['', None]:
         logger.error('Missing a start date')
@@ -83,7 +83,7 @@ def check_dates_and_times(
         '''The Subject for the event was: {}'''.format(subject))
         raise DateTimeError('Missing a start date')
         return False
-        
+
     for date in [start_date, end_date]:
         if date not in ['', None]:
             try:
@@ -97,7 +97,7 @@ def check_dates_and_times(
 
     for time in [start_time, end_time]:
         if time not in ['', None]:
-            try: 
+            try:
                 time = time.replace(' ', '')
                 if time[-2:].lower() in ['am','pm']:
                     datetime.strptime(time, '%I:%M%p')
@@ -109,7 +109,7 @@ def check_dates_and_times(
                 logger.error('Problem with time formatting. Time: {}'.format(time))
                 raise DateTimeError('Something isn\'t right with the times.')
                 return False
-    
+
     if all_day == None or all_day.lower() != 'true':
        if not (start_time and end_time):
            easygui.msgbox('''Missing a required time field in a non-all_day event on date: {}.\n'''
@@ -121,25 +121,26 @@ def check_dates_and_times(
     logger.debug('Date checker ended.')
     return True
 
-def main(open_gui = None):
+def main(infile=None):
     # The skipinitialspace option eliminates leading
     # spaces and reduces blank cells to '' while the clean_spaces
     # function gets rid of trailing spaces.
     try:
-        if open_gui == None:
+        if infile == None:
             start_dir = '~/'
             if isdir(expanduser("~/Desktop")):
                 start_dir = '~/Desktop/'
             msg = 'Please select the .csv file to be converted to .ics'
-            open_gui = easygui.fileopenbox(msg=msg, title="", default=expanduser(start_dir), filetypes=["*.csv"])
+            infile = easygui.fileopenbox(msg=msg, title="", default=expanduser(start_dir), filetypes=["*.csv"])
 
-        reader_builder = list(csv.DictReader(open(open_gui, 'Ub'), skipinitialspace = True))
+        reader_builder = list(csv.DictReader(open(infile, 'U'), skipinitialspace = True))
 
     # For testing comment 4 lines above (2 x if / else) and use this:
     #        reader_builder = list(csv.DictReader(open('path_to_tester.csv', 'rb'), skipinitialspace = True))
-    
-    except:
-        easygui.msgbox('Looks like there was an error opening the file, didn\'t even make it to the conversion part. Sorry!')
+
+    except Exception as e:
+        logger.exception(e)
+        easygui.msgbox("Looks like there was an error opening the file, didn't even make it to the conversion part. Sorry!")
         sys.exit(1)
 
     # Filter out events with empty subjects, a required element
@@ -160,11 +161,11 @@ def main(open_gui = None):
 
     # Write the clean list of dictionaries to events.
     rownum = 0
-    try:        
+    try:
         for row in reader:
             event = Event()
             event.add('summary', row['Subject'])
-                        
+
             try:
                 check_dates_and_times(
                     start_date = row.get('Start Date'),
@@ -176,7 +177,7 @@ def main(open_gui = None):
                 )
             except DateTimeError as e:
                 sys.exit(e)
-            
+
         # If marked as an "all day event," ignore times.
         # If start and end date are the same
         # or if end date is blank default to a single 24-hour event.
@@ -184,7 +185,7 @@ def main(open_gui = None):
 
                 # All-day events will not be marked as 'busy'
                 event.add('transp', 'TRANSPARENT')
-                
+
                 event.add('dtstart', datetime.strptime(row['Start Date'], '%m/%d/%Y' ).date())
 
                 if row.get('End Date') in ['', None]:
@@ -197,7 +198,7 @@ def main(open_gui = None):
 
                 # Events with times should be 'busy' by default
                 event.add('transp', 'OPAQUE')
-                
+
                 # Get rid of spaces
                 # Note: Must have both start and end times if not all_day, already checked
                 row['Start Time'] = row['Start Time'].replace(' ', '')
@@ -262,7 +263,7 @@ def main(open_gui = None):
 if __name__ == "__main__":
     try:
         if len(sys.argv) > 1:
-            main(open_gui = sys.argv[1])
+            main(infile=sys.argv[1])
         else:
             main()
     except (HeadersError, DateTimeError) as e:

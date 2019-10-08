@@ -20,7 +20,11 @@ If you're choosing to run it as a script, you probably know a lot more about Pyt
 Hmmm. Unclear what it would take to port to windows. You may give a shot to the webapp.
 
 #### WebApp
-[icsconverterwebapp.n8henrie.com](http://icsconverterwebapp.n8henrie.com)
+
+~~icsConverterWebapp~~ used to be hosted at
+http://icsconverterwebapp.n8henrie.com, but not anymore. The updated version is
+[live at icw.n8henrie.com](http://icw.n8henrie.com), source code at
+<https://github.com/n8henrie/icw>.
 
 ## Usage
 Not going to write this over again. See my post [here](http://n8henrie.com/2013/05/spreadsheet-to-calendar/).
